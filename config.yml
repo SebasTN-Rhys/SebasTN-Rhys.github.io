@@ -1,8 +1,8 @@
 theme: jekyll-theme-minimal
 title: SebasTN Official Site
 description: Explore innovative projects at the intersection of art and technology.
-baseurl: "/SebasTN.github.io" # the subpath of your site, e.g. /blog
-url: "https://sebastn.github.io" # the base hostname & protocol for your site
+baseurl: "/SebasTN-rhys.github.io" # the subpath of your site, e.g. /blog
+url: "https://sebastn-rhys.github.io" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
