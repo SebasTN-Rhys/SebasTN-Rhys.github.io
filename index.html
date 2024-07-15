@@ -12,27 +12,10 @@
       <p>Delving into the realms of AI, Blockchain, and Art.</p>
     </header>
 
-    <section id="featured-posts">
-      <h2>Featured Insights</h2>
-      <div class="posts">
-        {% assign featured_posts = site.posts | where: "featured", true %} {%
-        for post in featured_posts %}
-        <article>
-          <img
-            src="{{ post.image | prepend: site.baseurl }}"
-            alt="{{ post.title }}"
-          />
-          <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-          <p>{{ post.excerpt }}</p>
-        </article>
-        {% endfor %}
-      </div>
-    </section>
-
     <section id="latest-posts">
       <h2>Latest Posts</h2>
       <div class="posts">
-        {% for post in site.posts limit:5 %}
+        {% for post in site.posts %}
         <article>
           <img
             src="{{ post.image | prepend: site.baseurl }}"
@@ -50,9 +33,7 @@
     </section>
 
     <footer>
-      <p>
-        Copyright © {{ 'now' | date: "%Y" }} SebasTN Inc. All rights reserved.
-      </p>
+      <p>Copyright © {{ 'now' | date: "%Y" }} SebasTN. All rights reserved.</p>
     </footer>
 
     <script src="/assets/js/main.js"></script>
