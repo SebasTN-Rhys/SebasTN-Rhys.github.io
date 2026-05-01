@@ -2,46 +2,155 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SebasTN Official Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <title>SebasTN — Payments, Powered by GitHat</title>
+    <meta
+      name="description"
+      content="SebasTN is a modern payments product for merchants — accept blockchain and traditional rails, manage catalogs, and onboard customers. Identity and orgs powered by GitHat."
+    />
+    <link rel="canonical" href="https://sebastn.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="/assets/css/style.css" />
   </head>
   <body>
-    <header>
-      <h1>Welcome to SebasTN's Official Blog</h1>
-      <p>Delving into the realms of AI, Blockchain, and Art.</p>
+    <header class="site-header">
+      <div class="container nav">
+        <a href="/" class="brand">
+          <span class="brand__mark"></span>
+          <span class="brand__name">SebasTN</span>
+        </a>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#blog">Blog</a>
+          <a href="https://githat.io/auth/signin" class="btn btn--ghost">Sign in with GitHat</a>
+          <a href="https://githat.io/auth/signup" class="btn btn--primary">Get started</a>
+        </nav>
+      </div>
     </header>
 
-    <section id="latest-posts">
-      <h2>Latest Posts</h2>
-      <div class="posts">
-        <article>
-          <img
-            src="/assets/images/SebasTN-logo.jpg"
-            alt="SebasTN Logo"
-            style="width: 50%; max-width: 300px"
-          />
-          <h3>
-            <a href="/_posts//2024/07/15/first-post.html"
-              >FIRST-POST SebasTN: Pioneering Art & Technology</a
-            >
-            - July 15, 2024
-          </h3>
-          <p>
-            Welcome to the first post on the SebasTN blog! At SebasTN, we're at
-            the forefront of merging state-of-the-art technologies in AI,
-            blockchain, and the arts...<a
-              href="/_posts//2024/07/15/first-post.html"
-              >Read more</a
-            >
+    <main>
+      <section class="hero">
+        <div class="container hero__inner">
+          <span class="eyebrow">Payments · Powered by GitHat</span>
+          <h1 class="hero__title">Payments your customers actually finish.</h1>
+          <p class="hero__subtitle">
+            SebasTN is the payments product built on top of GitHat. Accept
+            blockchain and traditional payments, list your catalog, verify
+            with EIN — and let GitHat handle identity, orgs, and tokens.
           </p>
-          <p></p>
-        </article>
-      </div>
-    </section>
+          <div class="hero__cta">
+            <a href="https://githat.io/auth/signup" class="btn btn--primary btn--lg">
+              Start free
+            </a>
+            <a href="https://githat.io" class="btn btn--outline btn--lg">
+              Visit GitHat →
+            </a>
+          </div>
+          <p class="hero__meta">
+            One sign-in across SebasTN and every other GitHat-powered app.
+          </p>
+        </div>
+      </section>
 
-    <footer>
-      <p>Copyright © 2024 SebasTN. All rights reserved.</p>
+      <section id="features" class="section">
+        <div class="container">
+          <h2 class="section__title">What SebasTN gives you</h2>
+          <p class="section__lede">
+            All of GitHat's identity primitives, focused on the payments use case.
+          </p>
+          <div class="grid">
+            <article class="card">
+              <h3>Catalog &amp; Storefront</h3>
+              <p>
+                List products and services with images, descriptions, and
+                pricing. Multi-location ready.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Blockchain &amp; Card Rails</h3>
+              <p>
+                Accept on-chain payments alongside traditional Stripe-style
+                checkout. Settle in your currency of choice.
+              </p>
+            </article>
+            <article class="card">
+              <h3>EIN &amp; KYC</h3>
+              <p>
+                Connect your EIN, verify the business, and unlock higher
+                limits and merchant features.
+              </p>
+            </article>
+            <article class="card">
+              <h3>GitHat SSO</h3>
+              <p>
+                Customers and staff sign in with GitHat. Orgs, roles, and
+                invites work out of the box.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Agent Payouts</h3>
+              <p>
+                Pay AI agents and MCP servers directly with wallet-verified
+                tokens issued by GitHat.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Analytics</h3>
+              <p>
+                Conversion, revenue, and customer cohorts — surfaced inside
+                your GitHat dashboard.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section section--alt">
+        <div class="container">
+          <h2 class="section__title">Pricing</h2>
+          <p class="section__lede">
+            SebasTN runs on your GitHat plan. Pick the plan that fits — payments
+            features unlock at every tier.
+          </p>
+          <a href="https://githat.io/pricing" class="btn btn--primary btn--lg">
+            See GitHat pricing →
+          </a>
+        </div>
+      </section>
+
+      <section id="blog" class="section">
+        <div class="container">
+          <h2 class="section__title">From the blog</h2>
+          <article class="post">
+            <h3>
+              <a href="/_posts//2024/07/15/first-post.html">
+                SebasTN: Pioneering Art &amp; Technology
+              </a>
+            </h3>
+            <p class="post__date">July 15, 2024</p>
+            <p>
+              Our origin post — how SebasTN came together at the intersection
+              of art, technology, and payments.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>&copy; <span id="year"></span> SebasTN. Identity by <a href="https://githat.io">GitHat</a>.</p>
+        <nav class="site-footer__nav">
+          <a href="https://githat.io">GitHat</a>
+          <a href="https://githat.io/pricing">Pricing</a>
+          <a href="/about">About</a>
+        </nav>
+      </div>
     </footer>
 
     <script src="/assets/js/main.js"></script>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <title>Start Merchant Onboarding — SebasTN</title>
+    <meta name="robots" content="noindex" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a href="/" class="brand">
+          <span class="brand__mark"></span>
+          <span class="brand__name">SebasTN</span>
+        </a>
+        <nav>
+          <a href="/onboard">← Back to overview</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" style="padding-top:3rem">
+        <div class="container" style="max-width:560px">
+          <span class="eyebrow">Step 1 of 3</span>
+          <h1 style="font-size:1.9rem;font-weight:700;margin:1rem 0 0.5rem;letter-spacing:-0.01em">
+            Tell us about your business
+          </h1>
+          <p style="color:var(--text-secondary);margin-bottom:2rem">
+            We'll use this to create your Stripe Express account. Stripe will
+            then verify your identity and bank details on their secure hosted page.
+          </p>
+
+          <!-- Auth gate: shown if user is not signed in -->
+          <div id="auth-gate" class="info-box" style="display:none">
+            <p>
+              You need a GitHat account to become a Sebastn merchant.
+              <a href="https://githat.io/auth/signin?redirect=https://sebastn.com/onboard/start" class="btn btn--primary" style="margin-top:1rem;display:inline-block">
+                Sign in with GitHat
+              </a>
+            </p>
+          </div>
+
+          <!-- Error banner -->
+          <div id="error-banner" class="error-box" style="display:none">
+            <p id="error-message"></p>
+          </div>
+
+          <!-- Main form -->
+          <form id="onboard-form" style="display:none" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="businessName">Legal business name <span class="required">*</span></label>
+              <input
+                class="form-input"
+                type="text"
+                id="businessName"
+                name="businessName"
+                placeholder="Acme, LLC"
+                autocomplete="organization"
+                required
+              />
+              <p class="form-hint">Your registered legal name — exactly as it appears on government documents.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="country">Country <span class="required">*</span></label>
+              <select class="form-input" id="country" name="country" required>
+                <option value="">Select your country…</option>
+                <optgroup label="North America">
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                </optgroup>
+                <optgroup label="Europe">
+                  <option value="GB">United Kingdom</option>
+                  <option value="AT">Austria</option>
+                  <option value="BE">Belgium</option>
+                  <option value="BG">Bulgaria</option>
+                  <option value="HR">Croatia</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="CZ">Czech Republic</option>
+                  <option value="DK">Denmark</option>
+                  <option value="EE">Estonia</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="GR">Greece</option>
+                  <option value="HU">Hungary</option>
+                  <option value="IE">Ireland</option>
+                  <option value="IT">Italy</option>
+                  <option value="LV">Latvia</option>
+                  <option value="LT">Lithuania</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="MT">Malta</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="PL">Poland</option>
+                  <option value="PT">Portugal</option>
+                  <option value="RO">Romania</option>
+                  <option value="SK">Slovakia</option>
+                  <option value="SI">Slovenia</option>
+                  <option value="ES">Spain</option>
+                  <option value="SE">Sweden</option>
+                </optgroup>
+                <optgroup label="Pacific">
+                  <option value="AU">Australia</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Business contact email <span class="required">*</span></label>
+              <input
+                class="form-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@yourbusiness.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="description">What does your business sell? <span class="required">*</span></label>
+              <textarea
+                class="form-input"
+                id="description"
+                name="description"
+                rows="4"
+                placeholder="We sell handmade ceramics and pottery online and at local markets."
+                required
+                maxlength="500"
+              ></textarea>
+              <p class="form-hint">
+                Briefly describe your products or services (max 500 characters).
+              </p>
+            </div>
+
+            <div class="restricted-notice">
+              <strong>Sebastn does not support:</strong>
+              <ul>
+                <li>Firearms, weapons, and ammunition</li>
+                <li>Adult content and escort services</li>
+                <li>Gambling, lotteries, and sports betting</li>
+                <li>Controlled substances (cannabis, kratom, CBD)</li>
+                <li>Money services businesses and crypto exchanges</li>
+                <li>Debt collection and debt relief</li>
+                <li>Multi-level marketing (MLM)</li>
+                <li>Tobacco, vaping, and e-cigarette products</li>
+              </ul>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg" id="submit-btn" style="width:100%;margin-top:1.5rem">
+              Create account &amp; continue to verification →
+            </button>
+          </form>
+
+          <div id="loading" style="display:none;text-align:center;padding:3rem 0">
+            <div class="spinner"></div>
+            <p style="color:var(--text-secondary);margin-top:1rem">Creating your Stripe account…</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>&copy; <span id="year"></span> SebasTN. Identity by <a href="https://githat.io">GitHat</a>.</p>
+      </div>
+    </footer>
+
+    <style>
+      .form-group { margin-bottom: 1.25rem; }
+      .form-label {
+        display: block;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        margin-bottom: 0.4rem;
+      }
+      .required { color: var(--primary); }
+      .form-input {
+        width: 100%;
+        padding: 0.65rem 0.9rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        font-family: inherit;
+        font-size: 0.95rem;
+        transition: border-color var(--transition);
+        outline: none;
+      }
+      .form-input:focus { border-color: var(--primary); }
+      .form-input option, .form-input optgroup {
+        background: var(--bg-card);
+        color: var(--text-primary);
+      }
+      textarea.form-input { resize: vertical; }
+      .form-hint {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 0.35rem;
+      }
+      .restricted-notice {
+        background: rgba(139,92,246,0.08);
+        border: 1px solid rgba(139,92,246,0.25);
+        border-radius: var(--radius-md);
+        padding: 1rem 1.25rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+      .restricted-notice strong { color: var(--text-primary); display: block; margin-bottom: 0.5rem; }
+      .restricted-notice ul { padding-left: 1.25rem; list-style: disc; }
+      .restricted-notice li { margin-bottom: 0.2rem; }
+      .info-box {
+        background: rgba(0,212,255,0.06);
+        border: 1px solid rgba(0,212,255,0.25);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+      }
+      .error-box {
+        background: rgba(239,68,68,0.08);
+        border: 1px solid rgba(239,68,68,0.3);
+        border-radius: var(--radius-md);
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.25rem;
+        color: #f87171;
+        font-size: 0.9rem;
+      }
+      .spinner {
+        width: 36px; height: 36px;
+        border: 3px solid var(--border);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        margin: 0 auto;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/onboard-start.js"></script>
+  </body>
+</html>
