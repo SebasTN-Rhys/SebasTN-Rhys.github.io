@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <title>Merchant Dashboard — SebasTN</title>
+    <meta name="robots" content="noindex" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a href="/" class="brand">
+          <span class="brand__mark"></span>
+          <span class="brand__name">SebasTN</span>
+        </a>
+        <nav>
+          <a href="https://githat.io/auth/signin" class="btn btn--ghost" id="signin-link">Sign in with GitHat</a>
+          <a href="#" class="btn btn--ghost" id="signout-link" style="display:none">Sign out</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Auth gate -->
+      <div id="auth-gate" style="display:none">
+        <section class="section" style="text-align:center">
+          <div class="container" style="max-width:480px">
+            <h1 style="font-size:1.8rem;font-weight:700;margin-bottom:1rem">Sign in to view your dashboard</h1>
+            <p style="color:var(--text-secondary);margin-bottom:2rem">
+              Your Sebastn merchant dashboard is secured with GitHat. Sign in to continue.
+            </p>
+            <a id="auth-gate-link" href="https://githat.io/auth/signin" class="btn btn--primary btn--lg">
+              Sign in with GitHat →
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Loading -->
+      <div id="loading" style="text-align:center;padding:5rem 0">
+        <div class="spinner"></div>
+        <p style="color:var(--text-secondary);margin-top:1.5rem">Loading your merchant dashboard…</p>
+      </div>
+
+      <!-- Error -->
+      <div id="error-state" style="display:none">
+        <section class="section" style="text-align:center">
+          <div class="container" style="max-width:480px">
+            <h1 style="font-size:1.8rem;font-weight:700;margin-bottom:1rem">Could not load dashboard</h1>
+            <p id="error-msg" style="color:var(--text-secondary);margin-bottom:1.5rem"></p>
+            <a href="/onboard/start" class="btn btn--outline btn--lg">Start onboarding →</a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Dashboard -->
+      <div id="dashboard" style="display:none">
+        <section class="section" style="padding-top:2.5rem;padding-bottom:1rem">
+          <div class="container">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+              <div>
+                <h1 id="biz-name" style="font-size:1.7rem;font-weight:700;margin-bottom:0.25rem"></h1>
+                <p id="account-id-label" style="color:var(--text-muted);font-size:0.82rem;font-family:monospace"></p>
+              </div>
+              <div>
+                <span id="status-badge" class="status-badge"></span>
+              </div>
+            </div>
+
+            <div class="stats-row">
+              <div class="stat-card">
+                <p class="stat-label">Charges enabled</p>
+                <p id="charges-enabled" class="stat-value"></p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-label">Payouts enabled</p>
+                <p id="payouts-enabled" class="stat-value"></p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-label">Country</p>
+                <p id="account-country" class="stat-value"></p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-label">Currency</p>
+                <p id="account-currency" class="stat-value"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" style="padding-top:1rem">
+          <div class="container">
+            <h2 style="font-size:1.2rem;font-weight:600;margin-bottom:1rem">Recent payouts</h2>
+            <div id="payouts-table-wrap">
+              <table class="data-table" id="payouts-table">
+                <thead>
+                  <tr>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Arrival date</th>
+                    <th>Description</th>
+                    <th>Failure reason</th>
+                  </tr>
+                </thead>
+                <tbody id="payouts-body"></tbody>
+              </table>
+              <p id="no-payouts" style="display:none;color:var(--text-muted);font-size:0.9rem;padding:.75rem 0">No payouts yet.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" style="padding-top:1rem;padding-bottom:4rem">
+          <div class="container">
+            <h2 style="font-size:1.2rem;font-weight:600;margin-bottom:1rem">Recent charges</h2>
+            <table class="data-table" id="charges-table">
+              <thead>
+                <tr>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody id="charges-body"></tbody>
+            </table>
+            <p id="no-charges" style="display:none;color:var(--text-muted);font-size:0.9rem;padding:.75rem 0">No charges yet.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>&copy; <span id="year"></span> SebasTN. Identity by <a href="https://githat.io">GitHat</a>.</p>
+      </div>
+    </footer>
+
+    <style>
+      .spinner {
+        width: 40px; height: 40px;
+        border: 3px solid var(--border);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        margin: 0 auto;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 1rem 1.25rem;
+      }
+      .stat-label { color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .3rem; }
+      .stat-value { font-size: 1.15rem; font-weight: 600; }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.3rem 0.85rem;
+        border-radius: var(--radius-full);
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .status-active    { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+      .status-onboarding { background: rgba(0,212,255,0.10); color: var(--primary); border: 1px solid rgba(0,212,255,0.3); }
+      .status-restricted { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+      .status-disabled   { background: rgba(239,68,68,0.10); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+      .status-deauthorized { background: rgba(239,68,68,0.10); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+      }
+      .data-table th {
+        text-align: left;
+        padding: 0.6rem 0.75rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        border-bottom: 1px solid var(--border);
+      }
+      .data-table td {
+        padding: 0.75rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-secondary);
+      }
+      .data-table tr:last-child td { border-bottom: none; }
+    </style>
+
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/merchant-dashboard.js"></script>
+  </body>
+</html>
